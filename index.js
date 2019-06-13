@@ -47,7 +47,7 @@ exports.handler = function(event, context, callback) {
                 console.error('JWT Error', err, err.stack); 
                 callback(null, denyPolicy('anonymous', event.methodArn)); 
             } else { 
-                callback(null, allowPolicy(verified.user_id, event.methodArn)); 
+                callback(null, allowPolicy(verified.hasOwnProperty('user_id') ? verified.user_id : verified.opaque_user_id, event.methodArn)); 
             } 
         }); 
     }); 
